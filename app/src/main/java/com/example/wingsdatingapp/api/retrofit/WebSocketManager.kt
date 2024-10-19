@@ -23,7 +23,7 @@ class WebSocketManager @Inject constructor() {
 
     fun connect(userId: Int, onMessageReceived: (MessageModel) -> Unit) {
         val request = Request.Builder()
-            .url("ws://wingsrender-wtzc.onrender.com/socket")
+            .url("ws:////renderdemo-0g9b.onrender.com/socket")
             .build()
 
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
