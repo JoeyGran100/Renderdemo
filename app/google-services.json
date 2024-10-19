@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "156590942298",
+    "firebase_url": "https://dating-app-ea665-default-rtdb.firebaseio.com",
+    "project_id": "dating-app-ea665",
+    "storage_bucket": "dating-app-ea665.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156590942298:android:da54dffc4a3250ef965063",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156590942298-48b6ictiv4hskhth3l6e9h5k8b7m4g7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClEImuvnmdmJViUgCBWmsQy4FLfPr9iPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156590942298-48b6ictiv4hskhth3l6e9h5k8b7m4g7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156590942298:android:40be8b173b071de7965063",
+        "android_client_info": {
+          "package_name": "com.example.wingsdatingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156590942298-48b6ictiv4hskhth3l6e9h5k8b7m4g7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClEImuvnmdmJViUgCBWmsQy4FLfPr9iPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156590942298-48b6ictiv4hskhth3l6e9h5k8b7m4g7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

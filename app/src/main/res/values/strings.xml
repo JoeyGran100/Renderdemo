@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Wings Dating App</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_dating_main">DatingMainActivity</string>
+</resources>
