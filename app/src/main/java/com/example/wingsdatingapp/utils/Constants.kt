@@ -5,7 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
-const val BASE_URL="https://renderdemo-0g9b.onrender.com"
+const val BASE_URL="https://wingittest-flask-app-demo.onrender.com"
 
 // Old wingsRender
 //const val BASE_URL="https://wingsrender-wtzc.onrender.com"

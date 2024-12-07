@@ -1,7 +1,6 @@
 package com.example.wingsdatingapp.ui_screens.dating.screens.bottomnav
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
@@ -50,7 +50,7 @@ fun animatedNavigationBar(
     selectedColor: Color,
     unselectedColor: Color,
 ):Int{
-    val circleRadius = 26.dp
+    val circleRadius = 30.dp // Original design, this was 26
 val context= LocalContext.current
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
     var barSize by remember { mutableStateOf(IntSize(0, 0)) }
@@ -113,6 +113,7 @@ val context= LocalContext.current
                     clip = true
                 }
                 .fillMaxWidth()
+                .height(160.dp) // Increase the height to your desired value
                 .background(barColor),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
@@ -145,5 +146,6 @@ val context= LocalContext.current
             }
         }
     }
+
     return selectedItem
 }

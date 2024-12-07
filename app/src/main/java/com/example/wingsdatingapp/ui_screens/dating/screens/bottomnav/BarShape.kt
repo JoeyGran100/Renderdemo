@@ -14,7 +14,7 @@ class BarShape(
     private val offset: Float,
     private val circleRadius: Dp,
     private val cornerRadius: Dp,
-    private val circleGap: Dp = 5.dp,
+    private val circleGap: Dp = 10.dp, // Original value 5
 ) : Shape {
 
     override fun createOutline(

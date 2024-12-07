@@ -16,6 +16,7 @@ class UserDetailHiltViewModel @Inject constructor(private val userDataModelDao: 
     ViewModel() {
     private val _loggedInUser = MutableLiveData<UserDataModel?>()
     val loggedInUser: LiveData<UserDataModel?> get() = _loggedInUser
+
     fun insertUser(user: UserDataModel) {
         viewModelScope.launch {
             try {
@@ -26,6 +27,7 @@ class UserDetailHiltViewModel @Inject constructor(private val userDataModelDao: 
             }
         }
     }
+
 fun deleteUser(){
     viewModelScope.launch {
         try {

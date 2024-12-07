@@ -7,9 +7,13 @@ enum class DatingScreens {
     SettingScreen,
     PersonalityTestInitialScreen,
     PersonalityTestScreen,
-    AccountDetailScreen,
+    MainDetailSettingsScreen,
     HobbiesScreen,
     MatchesScreen,
     ChatScreen,
-    SelectedHobbiesScreen
+    SelectedHobbiesScreen,
+
+    // I added this
+    LocationScreen,
+    PremiumScreen
 }

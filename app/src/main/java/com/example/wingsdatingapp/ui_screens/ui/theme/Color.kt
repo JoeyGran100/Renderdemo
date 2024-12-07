@@ -11,3 +11,12 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 val Orange=Color(0xFFF26702)
 val DividerLineColor=Color(0xFFD0D0D0)
+
+val matchesLightGreyColor = Color(0xFFF1F1F5)
+val OrangeX = Color(0xFFF26702)
+
+val awesomeBlueColor = Color(0xFF1686FF)
+
+val bottomSheetBarColor = Color(0xFFf3f2f0)
+
+val textColorOfBio = Color(0xFF5c5a59)

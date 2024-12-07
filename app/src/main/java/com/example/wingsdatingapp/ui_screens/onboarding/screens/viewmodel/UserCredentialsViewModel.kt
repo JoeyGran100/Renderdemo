@@ -22,6 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserCredentialsViewModel @Inject constructor(private val repo: Repo) : ViewModel() {
+
+    // Original code created by Umair
     private val _postUserImageState = MutableStateFlow<NetworkResult<Any>>(NetworkResult.Loading)
     val postUserImageState: StateFlow<NetworkResult<Any>> = _postUserImageState
     fun postUserCredentials(

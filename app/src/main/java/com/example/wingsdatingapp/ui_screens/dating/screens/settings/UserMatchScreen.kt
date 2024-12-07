@@ -1,7 +1,8 @@
 package com.example.wingsdatingapp.ui_screens.dating.screens.settings
 
-import android.media.Image
 import android.util.Log
+import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,13 +11,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,14 +41,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.wingsdatingapp.R
 import com.example.wingsdatingapp.api.NetworkResult
 import com.example.wingsdatingapp.model.UserDataModel
@@ -57,10 +59,8 @@ import com.example.wingsdatingapp.ui_screens.dating.screens.viewmodel.MainViewMo
 import com.example.wingsdatingapp.ui_screens.dating.screens.viewmodel.UserMatchViewModel
 import com.example.wingsdatingapp.ui_screens.onboarding.screens.viewmodel.UserDetailHiltViewModel
 import com.example.wingsdatingapp.ui_screens.ui.theme.Orange
-import com.example.wingsdatingapp.utils.LoadingAnim
-import com.example.wingsdatingapp.utils.selectedItemIndex
+import com.example.wingsdatingapp.ui_screens.ui.theme.matchesLightGreyColor
 import com.example.wingsdatingapp.utils.updateSelectedUserMatch
-import com.example.wingsdatingapp.utils.updateUserPhoto
 import kotlinx.coroutines.launch
 
 @Composable
@@ -84,9 +84,12 @@ fun UserMatchLayout(
 
     Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 36.dp)) {
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp), verticalAlignment = Alignment.CenterVertically
+        ) {
 
             Image(
                 painter = painterResource(id = R.drawable.ic_back_btn),
@@ -97,10 +100,15 @@ fun UserMatchLayout(
                         indication = null, // Removes the click effect
                         interactionSource = remember { MutableInteractionSource() }
                     )
-            )     
-            Text(text = "Matches", color = Color.Black, fontSize = 24.sp,
+            )
+
+            Spacer(Modifier.width(25.dp))
+
+            Text(
+                text = "Matches", color = Color.Black, fontSize = 24.sp,
                 modifier = Modifier.padding(start = 16.dp), fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center)
+                textAlign = TextAlign.Center
+            )
         }
 
 
@@ -123,7 +131,7 @@ fun UserMatchLayout(
                         onAccepted = {
                             updateSelectedUserMatch(
                                 UserDataModel(
-                                    name=currentItem.name,
+                                    name = currentItem.name,
                                     email = currentItem.email,
                                     gender = currentItem.gender,
                                     hobbies = currentItem.hobbies,
@@ -144,8 +152,11 @@ fun UserMatchLayout(
             }
 
         } else {
+
             NoDataLayout()
+
         }
+
         when (val result = userList.value) {
             is NetworkResult.Error -> {
                 isAnimVisible = false
@@ -162,9 +173,11 @@ fun UserMatchLayout(
                     userDetailHiltViewModel = userDetailHiltViewModel
                 )
                 if (userMatch.isEmpty()) {
-                    NoDataLayout()
+
+                    // TODO: Previously it was NoDataLayout here but it was still showing even if users was added to the code!
+
                 } else {
-                    if (userMatched.isEmpty()) {
+                    if (userMatched.isNotEmpty()) {
                         Button(
                             onClick = {
                                 userMatch.forEach { model ->
@@ -188,7 +201,11 @@ fun UserMatchLayout(
                                 Orange
                             )
                         ) {
-                            Text(text = "Find Perfect Match", color = Color.White, fontWeight = FontWeight.Bold)
+                            Text(
+                                text = "Find Perfect Match",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
                 }
@@ -209,14 +226,14 @@ private fun NoDataLayout() {
     ) {
         Image(painter = painterResource(id = R.drawable.ic_no_data), contentDescription = "")
         Text(
-            text = "No Result Found",
+            text = "No Added Users!",
             fontWeight = FontWeight.Bold,
             fontSize = 26.sp,
             color = Color.Black,
             modifier = Modifier.padding(top = 30.dp)
         )
         Text(
-            text = "The search could not be found, please check spelling or write another word.",
+            text = "No users are added yet, but all the people you will meet & like will be added here! :D Just WingIt!",
             textAlign = TextAlign.Center,
             color = LightTextColor,
             fontWeight = FontWeight.Normal,
@@ -229,7 +246,116 @@ private fun NoDataLayout() {
     }
 }
 
+
+// I created a more modern UI for Matches screen. It functions well as the previous UI. Made 2024/10/28.
 @Composable
+private fun UserProfileItem(
+    name: String, age: String, profileImage: Int, obClickItem: () -> Unit,
+    onAccepted: () -> Unit, onRejected: () -> Unit
+) {
+    val localContext = LocalContext.current
+
+    Column(modifier = Modifier.padding(vertical = 10.dp)) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)  // Reduced height for compact look
+                .background(Color.White)
+                .border(1.dp, Color.LightGray, RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(12.dp))
+                .clickable { obClickItem() }
+                .padding(8.dp)  // Reduced inner padding
+        ) {
+            Row(
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Profile picture
+                Image(
+                    painter = painterResource(id = profileImage),
+                    contentDescription = "Profile picture",
+                    modifier = Modifier
+                        .size(80.dp)  // Smaller size for compact look
+                        .clip(CircleShape)
+                        .border(2.dp, color = Color.LightGray, shape = CircleShape),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.width(6.dp))  // Reduced spacer width
+
+                // Column for Name, Age, "New Request" text, and Buttons
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp), // Compact spacing
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .fillMaxWidth()
+                        .height(100.dp)  // Adjusted height for compact look
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) { // Inner column spacing
+                        // Name and Age
+                        Text(
+                            text = "$name, $age",
+                            fontSize = 16.sp,  // Reduced font size
+                            color = LightTextColor,
+                            fontWeight = FontWeight.SemiBold
+                        )
+
+                        // "New Request" text below the name
+                        Text(text = "New friend request", fontSize = 14.sp, color = Color.Gray)
+                        Text(text = "4 min ago", fontSize = 12.sp, color = Color.LightGray)
+                    }
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp), // Reduced space between buttons
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Button(
+                            onClick = {
+                                Toast.makeText(localContext, "Decline", Toast.LENGTH_SHORT).show()
+                                onRejected()
+                            },
+                            colors = ButtonDefaults.buttonColors(Color.White),
+                            border = BorderStroke(1.dp, Color.Red),
+                            shape = RoundedCornerShape(8.dp),  // Slightly rounded corners
+                            modifier = Modifier.weight(1f),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Text(
+                                text = "Decline",
+                                fontSize = 14.sp,  // Reduced font size
+                                color = Color.Red
+                            )
+                        }
+
+                        Button(
+                            onClick = {
+                                Toast.makeText(localContext, "Accepted", Toast.LENGTH_SHORT).show()
+                                onAccepted()
+                            },
+                            colors = ButtonDefaults.buttonColors(Orange),
+                            shape = RoundedCornerShape(8.dp),  // Slightly rounded corners
+                            modifier = Modifier.weight(1f),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Text(
+                                text = "Accept",
+                                fontSize = 14.sp,  // Reduced font size
+                                color = Color.White
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+
+// Original made by Umair. I changed this out to a more modern version of UI.
+/*@Composable
 private fun UserProfileItem(
     name: String, age: String, profileImage: Int, obClickItem: () -> Unit,
     onAccepted: () -> Unit, onRejected: () -> Unit
@@ -299,7 +425,7 @@ private fun UserProfileItem(
         }
 
     }
-}
+}*/
 
 @Composable
 fun findUserMatch(

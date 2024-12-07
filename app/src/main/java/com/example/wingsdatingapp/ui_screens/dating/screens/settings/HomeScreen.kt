@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,15 +35,14 @@ import com.example.wingsdatingapp.ui.theme.LightTextColor
 import com.example.wingsdatingapp.ui_screens.dating.screens.DatingMainActivity
 import com.example.wingsdatingapp.ui_screens.dating.screens.navigation.DatingNavigationItem
 import com.example.wingsdatingapp.ui_screens.dating.screens.viewmodel.MainViewModel
-import com.example.wingsdatingapp.ui_screens.onboarding.screens.SignUpScreen
 import com.example.wingsdatingapp.ui_screens.onboarding.screens.SplashActivity
 import com.example.wingsdatingapp.ui_screens.onboarding.screens.viewmodel.UserDetailHiltViewModel
 
 import com.example.wingsdatingapp.ui_screens.ui.theme.Orange
 
-object SettingsScreen {
+object HomeScreen {
     @Composable
-    fun SettingScreenLayout(
+    fun HomeScreenLayout(
         navController: NavController,
         mainViewModel: MainViewModel,
         userDetailHiltViewModel: UserDetailHiltViewModel
@@ -52,12 +52,15 @@ object SettingsScreen {
         val userImage = if (loginUser?.gender == "Men") R.drawable.ic_men else R.drawable.ic_women
         mainViewModel.showBottomBar()
 
-        Column(modifier = Modifier) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+        ) {
             // Top section with orange background and profile image
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(210.dp)
+                    .height(250.dp)
+                    .background(Color.White)
             ) {
                 // Orange background
                 Box(
@@ -95,20 +98,21 @@ object SettingsScreen {
                     )
                 }
             }
-            SettingItemsLayout(name = "Accounts", iconRes = R.drawable.ic_profile_settings) {
-                navController.navigate(DatingNavigationItem.AccountDetailScreen.route)
+
+            SettingItemsLayout(name = "Premium Members", color = LightTextColor, iconRes = R.drawable.ic_profile_settings) {
+
+                navController.navigate(DatingNavigationItem.PremiumMembersScreen.route)
             }
-            SettingItemsLayout(name = "Hobbies", iconRes = R.drawable.ic_hobbies) {
+
+            SettingItemsLayout(name = "Hobbies", color = LightTextColor, iconRes = R.drawable.ic_hobbies) {
                 navController.navigate(DatingNavigationItem.HobbiesScreen.route)
             }
-            SettingItemsLayout(name = "Personalities", iconRes = R.drawable.ic_profile_settings) {
 
-                navController.navigate(DatingNavigationItem.PersonalityTestInitialScreen.route)
-            }
-            SettingItemsLayout(name = "Matches", iconRes = R.drawable.ic_matches) {
+            SettingItemsLayout(name = "Matches", color = LightTextColor, iconRes = R.drawable.ic_matches) {
                 navController.navigate(DatingNavigationItem.MatchesScreen.route)
             }
-            SettingItemsLayout(name = "Logout", iconRes = R.drawable.ic_logout) {
+
+            SettingItemsLayout(name = "Logout", color = Color(0xFFFF0000), iconRes = R.drawable.ic_logout) {
                 userDetailHiltViewModel.deleteUser()
                 SharedPrefManager(context).saveCurrentUserState(false)
 
@@ -121,12 +125,12 @@ object SettingsScreen {
     }
 
     @Composable
-    private fun SettingItemsLayout(name: String, iconRes: Int, onClick: (String) -> Unit) {
+    private fun SettingItemsLayout(name: String, color: Color, iconRes: Int, onClick: (String) -> Unit) {
         Box(modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
             .background(
-                color = if (name == "Logout") Color(0xFFFF7F7F) else Color.White,
+                color = if (name == "Logout") Color.White else Color.White,
                 shape = RoundedCornerShape(4.dp)
             )
             .border(1.dp, Color(0xFFE6E6E6), RoundedCornerShape(4.dp))
@@ -137,7 +141,9 @@ object SettingsScreen {
                 modifier = Modifier.align(Alignment.CenterStart)
             )
             Text(
-                text = name, fontSize = 15.sp, color = LightTextColor,
+                text = name,
+                fontWeight = if (name == "Logout") FontWeight.Bold else FontWeight.Normal,
+                color = color,
                 modifier = Modifier
                     .padding(start = 32.dp)
                     .align(Alignment.CenterStart)

@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
 //    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -81,15 +82,19 @@ dependencies {
     implementation(libs.ktor.client.serialization)
     implementation (libs.ktor.client.websockets)
     implementation (libs.ktor.client.cio)
+
 //    implementation("io.ktor:ktor-client-logging:2.3.11")
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+
 //    implementation ("io.ktor:ktor-client-json:2.3.11")
     implementation (libs.kotlinx.serialization.json)
     implementation (libs.ktor.client.logging.jvm)
 
+    // Hilt
     kapt(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
+
     //Navigation
     implementation (libs.androidx.navigation.compose)
     implementation (libs.otpview)
@@ -97,11 +102,25 @@ dependencies {
     implementation (libs.androidx.material.icons.extended)
     implementation (libs.lottie.compose)
 
+    // Room
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)
 
     kapt("androidx.room:room-compiler:2.6.1")
+
+    // I added this 2024/10/23
+    implementation (libs.androidx.datastore.preferences)
+
+    // For Pop-up screen
+    implementation (libs.play.services.location)
+
+    // Google Play Services
+    implementation(libs.play.services.maps)
+    implementation(libs.accompanist.permissions)
+
+    // Constraint layout
+    implementation (libs.androidx.constraintlayout.compose)
 
     implementation (libs.gson)
     implementation (libs.retrofit)

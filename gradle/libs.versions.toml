@@ -1,7 +1,8 @@
 [versions]
-agp = "8.7.1"
+agp = "8.7.2"
 coilCompose = "2.6.0"
 converterGson = "2.9.0"
+datastorePreferences = "1.1.1"
 gson = "2.10.1"
 hiltAndroidCompiler = "2.48"
 kotlin = "1.9.21"
@@ -17,24 +18,31 @@ ktorClientLoggingJvm = "2.3.11"
 ktorClientSerialization = "2.3.11"
 ktorClientWebsockets = "2.3.11"
 ktorSerializationKotlinxJson = "2.3.11"
-lifecycleRuntimeKtx = "2.8.6"
+lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-composeBom = "2024.10.00"
+composeBom = "2024.10.01"
 lottieCompose = "6.0.0"
 material3 = "Tag"
-materialIconsExtended = "1.7.4"
+materialIconsExtended = "1.7.5"
 navigationCompose = "2.8.3"
 otpview = "2.0.1"
 playServicesAuth = "21.2.0"
+playServicesLocation = "21.3.0"
 retrofit = "2.9.0"
 roomKtx = "2.6.1"
 roomRuntime = "2.6.1"
 googleGmsGoogleServices = "4.4.2"
-firebaseAuth = "23.0.0"
+firebaseAuth = "23.1.0"
 socketIoClient = "2.0.1"
+playServicesMaps = "19.0.0"
+accompanistPermissions = "0.35.0-alpha"
+
+constraintlayoutCompose = "1.1.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
@@ -72,8 +80,16 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 otpview = { module = "com.github.ozcanalasalvar:otpview", version.ref = "otpview" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 socket-io-client = { module = "io.socket:socket.io-client", version.ref = "socketIoClient" }
+
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -105,6 +106,7 @@ object ProfileScreen {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(bottom = 190.dp) // increasing the padding at the bottom making the button more visible and does not overlap with custom bottomNavBar
         ) {
             item {
                 // Top section with orange background and profile image

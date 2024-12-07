@@ -30,52 +30,79 @@ import com.example.wingsdatingapp.ui_screens.dating.screens.navigation.DatingNav
 import com.example.wingsdatingapp.ui_screens.dating.screens.viewmodel.MainViewModel
 import com.example.wingsdatingapp.ui_screens.ui.theme.Orange
 
-@Composable
-fun PersonalityScreenLayout(navController: NavController,mainViewModel: MainViewModel){
-    val context= LocalContext.current
-mainViewModel.hideBottomBar()
+// TODO: This screen is no longer in use. Personalities are moved to hobbies screen as an option instead.
+// TODO: This can be DELETED!
 
-    Column (modifier = Modifier
-        .fillMaxSize()
-        .padding(start = 16.dp, end = 16.dp)){
-        Image(painter = painterResource(id = R.drawable.ic_back_btn), contentDescription ="" ,
+/*
+@Composable
+fun PersonalityScreenLayout(navController: NavController, mainViewModel: MainViewModel) {
+
+    val context = LocalContext.current
+
+    mainViewModel.hideBottomBar()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
+        Image(painter = painterResource(id = R.drawable.ic_back_btn), contentDescription = "",
             modifier = Modifier
                 .padding(top = 36.dp)
                 .clickable {
                     navController.popBackStack()
                 })
-        Text(text = "Personality Test", fontSize = 28.sp, color = Color.Black, modifier = Modifier.padding(top = 32.dp)
-        , fontWeight = FontWeight.Bold)
-        Text(text = "You are about to take our personality test. If you already know your personality type, you can skip the test and choose manually."
-        , fontSize = 16.sp, color = LightTextColor, fontWeight = FontWeight.Light)
-        Image(painter = painterResource(id = R.drawable.ic_personality_test), contentDescription ="",
+        Text(
+            text = "Personality Test",
+            fontSize = 28.sp,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 32.dp),
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "You are about to take our personality test. If you already know your personality type, you can skip the test and choose manually.",
+            fontSize = 16.sp,
+            color = LightTextColor,
+            fontWeight = FontWeight.Light
+        )
+        Image(
+            painter = painterResource(id = R.drawable.ic_personality_test), contentDescription = "",
             modifier = Modifier
                 .padding(top = 60.dp)
-                .align(Alignment.CenterHorizontally))
+                .align(Alignment.CenterHorizontally)
+        )
         Spacer(modifier = Modifier.weight(1f))
-    Button(onClick = { navController.navigate(DatingNavigationItem.PersonalityTestScreen.route)}, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(
-        Orange)) {
-        Text(
-            text = "Take a test",
-            fontSize = 16.sp,
-            color = Color.White,
-            modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
-        )
-    }
-    Button(onClick = {navController.navigate(DatingNavigationItem.PersonalityTestScreen.route) }, modifier = Modifier
-        .fillMaxWidth()
-        .padding(top = 8.dp)
-        .border(1.dp, Orange, shape = RoundedCornerShape(24.dp)),
-        colors = ButtonDefaults.buttonColors(
-            Color.White),
-    ) {
-        Text(
-            text = "Choose Manually",
-            fontSize = 16.sp,
-            color = Orange,
-        )
-    }
+        Button(
+            onClick = { navController.navigate(DatingNavigationItem.PersonalityTestScreen.route) },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                Orange
+            )
+        ) {
+            Text(
+                text = "Take a test",
+                fontSize = 16.sp,
+                color = Color.White,
+                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
+            )
+        }
+        Button(
+            onClick = { navController.navigate(DatingNavigationItem.PersonalityTestScreen.route) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+                .border(1.dp, Orange, shape = RoundedCornerShape(24.dp)),
+            colors = ButtonDefaults.buttonColors(
+                Color.White
+            ),
+        ) {
+            Text(
+                text = "Choose Manually",
+                fontSize = 16.sp,
+                color = Orange,
+            )
+        }
 
 
     }
-}
+}*/
