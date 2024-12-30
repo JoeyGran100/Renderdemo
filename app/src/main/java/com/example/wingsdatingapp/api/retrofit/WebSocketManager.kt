@@ -23,7 +23,7 @@ class WebSocketManager @Inject constructor() {
 
     fun connect(userId: Int, onMessageReceived: (MessageModel) -> Unit) {
         val request = Request.Builder()
-            .url("ws:////pkdozdddeutactuhwpld.supabase.co/socket")
+            .url("ws://pkdozdddeutactuhwpld.supabase.co/socket")
             .build()
 
         // Old string for Render
