@@ -23,11 +23,8 @@ class WebSocketManager @Inject constructor() {
 
     fun connect(userId: Int, onMessageReceived: (MessageModel) -> Unit) {
         val request = Request.Builder()
-            .url("ws://pkdozdddeutactuhwpld.supabase.co/socket")
+            .url("ws://flask-render-deployment-u750.onrender.com/socket")
             .build()
-
-        // Old string for Render
-//        "ws://flask-render-deployment-u750.onrender.com/socket"
 
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
