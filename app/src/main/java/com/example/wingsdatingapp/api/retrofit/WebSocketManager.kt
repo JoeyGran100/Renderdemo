@@ -23,7 +23,7 @@ class WebSocketManager @Inject constructor() {
 
     fun connect(userId: Int, onMessageReceived: (MessageModel) -> Unit) {
         val request = Request.Builder()
-            .url("ws://flask-render-deployment-i3wu.onrender.com/socket")
+            .url("ws://flask-render-deployment-m594.onrender.com/socket")
             .build()
 
         // Old connection
