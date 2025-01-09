@@ -212,7 +212,7 @@ object SelectPreferenceScreen {
 
                                 // I added this 2025/01/05
                                 userPreferenceViewModel.postUserPreferenceData(
-                                    context, UserPreferenceModel(preference = preference.toString())
+                                    context, UserPreferenceModel(preference = preference)
                                 ) { result ->
 
                                     when (result) {
