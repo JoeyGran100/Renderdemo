@@ -1,9 +1,11 @@
 package com.example.wingsdatingapp.api.retrofit
 
+import androidx.datastore.preferences.protobuf.Timestamp
 import com.example.wingsdatingapp.model.MessageModel
 import com.example.wingsdatingapp.model.UserAuthModel
 import com.example.wingsdatingapp.model.UserDataModel
 import com.example.wingsdatingapp.model.UserImageModel
+import com.example.wingsdatingapp.model.UserPreferenceModel
 import com.example.wingsdatingapp.model.UsersModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -19,6 +21,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.time.LocalDateTime
 
 interface UserService {
     @POST("users")
@@ -29,6 +32,10 @@ interface UserService {
 
     @POST("userData")
     suspend fun postUserData(@Body data: UserDataModel): Response<Void>
+
+    // I added this 2025/01/05
+    @POST("preference")
+    suspend fun postUserPreference(@Body data: UserPreferenceModel): Response<Void>
 
     @Multipart
     @POST("/upload_image")
@@ -54,7 +61,17 @@ interface UserService {
     suspend fun sendMessage(
         @Field("receiver_email") receiverEmail: String,
         @Field("sender_email") senderEmail: String,
-        @Field("message") message: String
+        @Field("message") message: String,
+
+        // I added timestamp
+        @Field("timestamp") timestamp: String
+
     ): Response<Void>
+
+//    // I added this
+//    @GET("send_message")
+//    suspend fun getTimeStamp(
+//        @Field("timestamp") time: LocalDateTime
+//    )
 
 }

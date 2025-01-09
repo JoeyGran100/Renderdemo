@@ -8,6 +8,7 @@ import com.example.wingsdatingapp.model.MessageModel
 import com.example.wingsdatingapp.model.UserAuthModel
 import com.example.wingsdatingapp.model.UserDataModel
 import com.example.wingsdatingapp.model.UserImageModel
+import com.example.wingsdatingapp.model.UserPreferenceModel
 import com.example.wingsdatingapp.model.UsersModel
 import com.example.wingsdatingapp.ui_screens.onboarding.screens.navigation.NavigationItem
 import com.example.wingsdatingapp.utils.BASE_URL
@@ -42,11 +43,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.time.LocalDateTime
 import javax.inject.Inject
 
-class UserApi @Inject constructor(private val userService: UserService,
-                                  private val webSocketManager: WebSocketManager
+class UserApi @Inject constructor(
+    private val userService: UserService,
+    private val webSocketManager: WebSocketManager
 ) {
+
+    // I added this 2025/01/05
+    suspend fun postUserPreference(data: UserPreferenceModel): Response<Void> {
+        return userService.postUserPreference(data)
+    }
 
     suspend fun postUserCredentials(data: UserAuthModel): Response<Void> {
         return userService.postUserCredentials(data)
@@ -82,7 +90,8 @@ class UserApi @Inject constructor(private val userService: UserService,
                     val responseString = response.body()?.string()
                     try {
                         val jsonObject = JSONObject(responseString.toString())
-                        val imageUrl = jsonObject.optString("image_url") // Adjust based on your API structure
+                        val imageUrl =
+                            jsonObject.optString("image_url") // Adjust based on your API structure
 
                         // Call the success lambda and pass the image URL
                         onSuccess(imageUrl)
@@ -109,7 +118,6 @@ class UserApi @Inject constructor(private val userService: UserService,
     }
 
 
-
     suspend fun getUserImage(userId: Int): Response<UserImageModel> {
         return userService.getUserImage(userId)
     }
@@ -122,21 +130,25 @@ class UserApi @Inject constructor(private val userService: UserService,
         return userService.sendMessage(
             receiverEmail = messageModel.receiver_email ?: "",
             senderEmail = messageModel.sender_email ?: "",
-            message = messageModel.message.toString()
+            message = messageModel.message ?: "",
+
+            // I added this timestamp
+            timestamp = messageModel.timestamp ?: ""
         )
     }
 
     fun receiveMessages(userId: Int, onMessageReceived: (MessageModel) -> Unit) {
         webSocketManager.connect(userId, onMessageReceived)
     }
+
     suspend fun getChats(emailOne: String, emailTwo: String): Response<List<MessageModel>> {
         return userService.getChats(emailOne, emailTwo)
     }
+
     fun disconnectWebSocket() {
         webSocketManager.disconnect()
     }
 }
-
 
 
 //class UserApi @Inject constructor(private val client: HttpClient) {

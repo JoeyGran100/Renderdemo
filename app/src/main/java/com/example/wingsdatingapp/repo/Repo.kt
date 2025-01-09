@@ -5,6 +5,7 @@ import com.example.wingsdatingapp.model.MessageModel
 import com.example.wingsdatingapp.model.UserAuthModel
 import com.example.wingsdatingapp.model.UserDataModel
 import com.example.wingsdatingapp.model.UserImageModel
+import com.example.wingsdatingapp.model.UserPreferenceModel
 import com.example.wingsdatingapp.model.UsersModel
 import io.ktor.client.statement.HttpResponse
 import retrofit2.Response
@@ -12,6 +13,11 @@ import java.io.File
 import javax.inject.Inject
 
 class Repo @Inject constructor(private val userApi: UserApi) {
+
+    // I added this 2025/01/05
+    suspend fun postUserPreference(data: UserPreferenceModel): Response<Void> {
+        return userApi.postUserPreference(data)
+    }
 
     suspend fun postUserCredentials(data: UserAuthModel): Response<Void> {
         return userApi.postUserCredentials(data)
@@ -47,6 +53,7 @@ class Repo @Inject constructor(private val userApi: UserApi) {
     suspend fun getUserChats(emailOne:String,emailTwo:String):Response<List<MessageModel>> {
         return userApi.getChats(emailOne,emailTwo)
     }
+
 }
 
 
