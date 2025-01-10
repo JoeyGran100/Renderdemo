@@ -211,49 +211,37 @@ object SelectPreferenceScreen {
                             ) {
 
                                 // I added this 2025/01/05
+                                // Trigger ViewModel Function
                                 userPreferenceViewModel.postUserPreferenceData(
-                                    context, UserPreferenceModel(preference = preference)
+                                    UserPreferenceModel(preference = preference)
                                 ) { result ->
-
                                     when (result) {
-
                                         is NetworkResult.Success -> {
-
                                             isAnimVisible = false
                                             showLoadingAnim = false
-
                                             Toast.makeText(
                                                 context,
-                                                "Preference successfully added!",
+                                                result.data ?: "Preference successfully added!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-
                                             navController.navigate("${NavigationItem.UserDetails.route}/${gender}/${preference}")
-
-
                                         }
-
                                         NetworkResult.Loading -> {
+                                            isAnimVisible = true
                                             showLoadingAnim = true
-
                                         }
-
                                         is NetworkResult.Error -> {
+                                            isAnimVisible = false
                                             showLoadingAnim = false
-
                                             Toast.makeText(
                                                 context,
-                                                "Error, Preference not added! Try again!",
+                                                result.message ?: "Error, Preference not added! Try again!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
-
-
                                     }
-
-
-
                                 }
+
 
 
                             } else {
